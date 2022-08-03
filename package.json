@@ -6,19 +6,59 @@
   "license": "SAP SAMPLE CODE LICENSE",
   "repository": "https://github.com/SAP-samples/sap-learning-extension-suite",
   "engines": {
-    "node": ">=14"
+    "node": "^12.0.0 || ^14.0.0"
   },
   "private": true,
   "dependencies": {
-    "@sap/cds": "5.1.5",
+    "@sap/cds": "6.0.4",
     "@sap/cds-dk": "4.1.5",
-    "express": "^4"
+    "@sap/xssec": "^3.2.13",
+    "express": "^4",
+    "hdb": "^0.19.4",
+    "passport": "^0.6.0"
   },
   "devDependencies": {
-    "@sap/ux-specification": "^1.96.2",
+    "@sap/ux-specification": "^1.102.2",
     "sqlite3": "^5.0.2"
   },
   "scripts": {
-    "start": "cds run"
+    "start": "cds run",
+    "watch-risks": "cds watch --open risks/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/risks"
+  ],
+  "cds": {
+    "requires": {
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "[sandbox]": {
+          "credentials": {
+            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+          },
+          "headers": {
+            "APIKey": "yVEypeMZQmmbtalPXkGSJJfgOtnkw8jL"
+        }
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "API_BUSINESS_PARTNER"
+          },
+          "headers": {
+            "APIKey": "yVEypeMZQmmbtalPXkGSJJfgOtnkw8jL"
+        }
+        }
+      },
+      "db": {
+        "kind": "hana-cloud"
+      },
+      "xsuaa": {
+"kind": "xsuaa"
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
   }
 }
