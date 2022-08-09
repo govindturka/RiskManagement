@@ -10,7 +10,7 @@ applications:
 - name: risk-management-srv
   random-route: true  # for development only
   path: gen/srv
-  memory: 256M
+  memory: 1024M
   buildpack: nodejs_buildpack
   services:
   - risk-management-db
@@ -24,7 +24,7 @@ applications:
   path: gen/db
   no-route: true
   health-check-type: process
-  memory: 256M
+  memory: 1024M
   instances: 1
   buildpack: nodejs_buildpack
   services:
